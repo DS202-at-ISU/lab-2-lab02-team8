@@ -151,7 +151,7 @@ FirePlace: Yes/No (string or Boolean).
 
 Neighborhood: Limited set of neighborhood codes or names.
 
-2.  I am interested in bedrooms vs sale price.
+2.  I am interested in total living area vs sale price.
 
     3, 4.
 
@@ -258,6 +258,7 @@ ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
   theme_minimal()
 ```
 
+<<<<<<< HEAD
 ## Tam Minh Nguyen
 
 ### Data Exploration
@@ -313,6 +314,8 @@ ggplot(avg_sale_price, aes(x = AC, y = avg_price, fill = AC)) +
 
 The bar chart shows a clear pattern where the properties with air conditioning have a significantly higher average sale price compared to those without air conditioning. This variable shows a clear difference in sale prices, suggesting that air conditioning is an important feature that strongly affects property value. Moreover, there are no specific oddities apparent from the data. People should look into why there is the big difference in sale price to understand what consumers want and market trends.
 
+=======
+>>>>>>> 4874a2361ed893ab843312a3835f40143597e6b5
 Follow the instructions posted at <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
 Include your answers in this document (Rmd file). Make sure that it knits properly (into the md file). Upload both the Rmd and the md file to your repository.
