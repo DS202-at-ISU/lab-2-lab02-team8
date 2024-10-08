@@ -89,7 +89,7 @@ ggplot(ames_clean, aes(x = `YearBuilt`, y = `Sale Price`)) +
 
 ### Data Exploration
 
-1.  This dataset appears to include property transaction details, specifically focusing on sales of real estate in Ames. 
+1.  This dataset appears to include property transaction details, specifically focusing on sales of real estate in Ames.
 
 Parcel ID: Categorical (likely a string or integer). Unique identifier for each property parcel.
 
@@ -174,7 +174,6 @@ ggplot(classdata::ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) +
 ```
 
 From the plot of Sale Price vs Total Living Area (sf), we see a clear pattern where most sale prices remain clustered at the lower range, despite varying total living areas. There's an odd concentration of extremely high sale prices around the same living area, possibly indicating erroneous or outlier data. It would be useful to investigate these high-priced outliers further to confirm their validity, as they deviate sharply from the rest of the dataset.
-
 
 Follow the instructions posted at <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
