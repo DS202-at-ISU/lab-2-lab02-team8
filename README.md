@@ -188,7 +188,7 @@ ggplot(classdata::ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) +
     ## Warning: Removed 447 rows containing missing values or values outside the scale range
     ## (`geom_line()`).
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](README_files/figure-gfm/sale_price%20vs%20total%20living%20area.png)<!-- -->
 
 From the plot of Sale Price vs Total Living Area (sf), we see a clear
 pattern where most sale prices remain clustered at the lower range,
