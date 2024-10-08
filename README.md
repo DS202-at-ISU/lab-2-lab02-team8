@@ -156,7 +156,7 @@ FirePlace: Yes/No (string or Boolean).
 
 Neighborhood: Limited set of neighborhood codes or names.
 
-2.  I am interested in bedrooms vs sale price.
+2.  I am interested in total living area vs sale price.
 
     3, 4.
 

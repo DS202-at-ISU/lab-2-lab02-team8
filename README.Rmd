@@ -151,7 +151,7 @@ FirePlace: Yes/No (string or Boolean).
 
 Neighborhood: Limited set of neighborhood codes or names.
 
-2.  I am interested in bedrooms vs sale price.
+2.  I am interested in total living area vs sale price.
 
     3, 4.
 
@@ -177,13 +177,13 @@ From the plot of Sale Price vs Total Living Area (sf), we see a clear pattern wh
 
 ## Nhat Le
 
-1. Therefore, 6935 records with 16 variables. For example:
-- Sale Price
-- Year Built
-- Arcres
--Total Living Area
-- Bedriins
-- LotArea
+1.  Therefore, 6935 records with 16 variables. For example:
+
+-   Sale Price
+-   Year Built
+-   Arcres -Total Living Area
+-   Bedriins
+-   LotArea
 
 The data types of the variable can be seen by running the below code "str(ames)"
 
@@ -191,23 +191,26 @@ The data types of the variable can be seen by running the below code "str(ames)"
 ames <- classdata::ames
 str(ames)
 ```
+
 We can see the means and other statistical summaries by running summary(ames)
+
 ```{r}
 summary(ames)
 ```
 
-2. I will be inspecting the Bedrooms and the Sale Price
+2.  I will be inspecting the Bedrooms and the Sale Price
 
 3 & 4. Sale price ra ranges from 0 to 20500000; Bedrooms ranges from 0 to 10
+
 ```{r}
 range(ames$`Sale Price`, rm.na = TRUE)
 ```
-
 
 ```{r}
 bedroom_range <- range(ames$Bedrooms, na.rm = TRUE)
 print(bedroom_range)
 ```
+
 The bar chart showing the average sale price by the number of bedrooms indicates how property pricing varies with the number of bedrooms. Typically, you would expect that more bedrooms could correlate with a higher average sale price, although the chart suggests there might be nuances in this relationship.
 
 Review the bar chart for any apparent trends. For example, if properties with one bedroom have significantly higher average sale prices than those with two or three, this might indicate a specific market demand or limited availability of one-bedroom properties.
@@ -254,10 +257,6 @@ ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
        y = "Sale Price") +
   theme_minimal()
 ```
-
-
-
-
 
 Follow the instructions posted at <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
