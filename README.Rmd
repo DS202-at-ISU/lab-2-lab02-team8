@@ -175,6 +175,90 @@ ggplot(classdata::ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) +
 
 From the plot of Sale Price vs Total Living Area (sf), we see a clear pattern where most sale prices remain clustered at the lower range, despite varying total living areas. There's an odd concentration of extremely high sale prices around the same living area, possibly indicating erroneous or outlier data. It would be useful to investigate these high-priced outliers further to confirm their validity, as they deviate sharply from the rest of the dataset.
 
+## Nhat Le
+
+1. Therefore, 6935 records with 16 variables. For example:
+- Sale Price
+- Year Built
+- Arcres
+-Total Living Area
+- Bedriins
+- LotArea
+
+The data types of the variable can be seen by running the below code "str(ames)"
+
+```{r}
+ames <- classdata::ames
+str(ames)
+```
+We can see the means and other statistical summaries by running summary(ames)
+```{r}
+summary(ames)
+```
+
+2. I will be inspecting the Bedrooms and the Sale Price
+
+3 & 4. Sale price ra ranges from 0 to 20500000; Bedrooms ranges from 0 to 10
+```{r}
+range(ames$`Sale Price`, rm.na = TRUE)
+```
+
+
+```{r}
+bedroom_range <- range(ames$Bedrooms, na.rm = TRUE)
+print(bedroom_range)
+```
+The bar chart showing the average sale price by the number of bedrooms indicates how property pricing varies with the number of bedrooms. Typically, you would expect that more bedrooms could correlate with a higher average sale price, although the chart suggests there might be nuances in this relationship.
+
+Review the bar chart for any apparent trends. For example, if properties with one bedroom have significantly higher average sale prices than those with two or three, this might indicate a specific market demand or limited availability of one-bedroom properties.
+
+Look for outliers or unusual data points. If certain bedroom counts have much higher or lower prices than expected, investigate these cases further. For instance, if a property with four bedrooms sells for much less than average, it could be due to other factors like condition, location, or market anomalies.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+# Assuming 'ames' is your dataframe
+# First, ensure Bedrooms is numeric and remove NA values
+ames$Bedrooms <- as.numeric(as.character(ames$Bedrooms))
+ames <- na.omit(ames)
+
+# Create a summarized dataframe to calculate the average Sale Price for each number of Bedrooms
+average_price <- ames %>%
+  group_by(Bedrooms) %>%
+  summarize(Average_Sale_Price = mean(`Sale Price`, na.rm = TRUE))
+
+# Create bar chart
+ggplot(average_price, aes(x = factor(Bedrooms), y = Average_Sale_Price)) +
+  geom_bar(stat = "identity", fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Average Sale Price by Number of Bedrooms",
+       x = "Number of Bedrooms",
+       y = "Average Sale Price") +
+  theme_minimal()
+```
+
+```{r}
+# Assuming 'ames' is your dataframe
+# First, ensure Bedrooms is numeric and remove NA values
+ames$Bedrooms <- as.numeric(as.character(ames$Bedrooms))
+ames <- na.omit(ames)
+
+# Perform ANOVA
+anova_result <- aov(`Sale Price` ~ factor(Bedrooms), data = ames)
+summary(anova_result)
+
+# Visualize ANOVA results with boxplot
+ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
+  geom_boxplot(fill = "lightblue", color = "black", alpha = 0.7) +
+  labs(title = "Boxplot of Sale Price by Number of Bedrooms",
+       x = "Number of Bedrooms",
+       y = "Sale Price") +
+  theme_minimal()
+```
+
+
+
+
+
 Follow the instructions posted at <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
 Include your answers in this document (Rmd file). Make sure that it knits properly (into the md file). Upload both the Rmd and the md file to your repository.
