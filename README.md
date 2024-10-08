@@ -76,9 +76,7 @@ more, house price started increasing more rapidly starting 1980.
 ### Data Exploration
 
 1.  This dataset appears to include property transaction details,
-    specifically focusing on sales of real estate in Ames. Here’s a
-    breakdown of the variables, their likely types, and what they might
-    mean:
+    specifically focusing on sales of real estate in Ames.
 
 Parcel ID: Categorical (likely a string or integer). Unique identifier
 for each property parcel.
@@ -199,9 +197,6 @@ extremely high sale prices around the same living area, possibly
 indicating erroneous or outlier data. It would be useful to investigate
 these high-priced outliers further to confirm their validity, as they
 deviate sharply from the rest of the dataset.
-
-This dataset would allow for various analyses of real estate
-transactions and property characteristics across Ames.
 
 Follow the instructions posted at
 <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
