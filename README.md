@@ -78,6 +78,28 @@ more, house price started increasing more rapidly starting 1980.
 1.  This dataset appears to include property transaction details,
     specifically focusing on sales of real estate in Ames.
 
+    ``` r
+    str(classdata::ames)
+    ```
+
+        ## Classes 'tbl_df', 'tbl' and 'data.frame':    6935 obs. of  16 variables:
+        ##  $ Parcel ID            : chr  "0903202160" "0907428215" "0909428070" "0923203160" ...
+        ##  $ Address              : chr  "1024 RIDGEWOOD AVE, AMES" "4503 TWAIN CIR UNIT 105, AMES" "2030 MCCARTHY RD, AMES" "3404 EMERALD DR, AMES" ...
+        ##  $ Style                : Factor w/ 12 levels "1 1/2 Story Brick",..: 2 5 5 5 NA 9 5 5 5 5 ...
+        ##  $ Occupancy            : Factor w/ 5 levels "Condominium",..: 2 1 2 3 NA 2 2 1 2 2 ...
+        ##  $ Sale Date            : Date, format: "2022-08-12" "2022-08-04" ...
+        ##  $ Sale Price           : num  181900 127100 0 245000 449664 ...
+        ##  $ Multi Sale           : chr  NA NA NA NA ...
+        ##  $ YearBuilt            : num  1940 2006 1951 1997 NA ...
+        ##  $ Acres                : num  0.109 0.027 0.321 0.103 0.287 0.494 0.172 0.023 0.285 0.172 ...
+        ##  $ TotalLivingArea (sf) : num  1030 771 1456 1289 NA ...
+        ##  $ Bedrooms             : num  2 1 3 4 NA 4 5 1 3 4 ...
+        ##  $ FinishedBsmtArea (sf): num  NA NA 1261 890 NA ...
+        ##  $ LotArea(sf)          : num  4740 1181 14000 4500 12493 ...
+        ##  $ AC                   : chr  "Yes" "Yes" "Yes" "Yes" ...
+        ##  $ FirePlace            : chr  "Yes" "No" "No" "No" ...
+        ##  $ Neighborhood         : Factor w/ 42 levels "(0) None","(13) Apts: Campus",..: 15 40 19 18 6 24 14 40 13 23 ...
+
 Parcel ID: Categorical (likely a string or integer). Unique identifier
 for each property parcel.
 
@@ -173,6 +195,24 @@ range(classdata::ames$`Sale Price`, na.rm = TRUE)
     ## [1]        0 20500000
 
 ``` r
+library(classdata)
+
+hist(classdata::ames$`TotalLivingArea (sf)`,
+     main = "Histogram of Total Living Area",
+     xlab = "Total Living Area (sf)",
+     breaks = 30,
+     col = "lightblue",
+     border = "black")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+The general pattern shows that most homes have a total living area
+between 1000 and 2500 square feet, with the peak around 2000 square
+feet. The distribution is right-skewed, with a few outliers of very
+large homes, especially those above 4000 square feet.
+
+``` r
 library(ggplot2)
 ggplot(classdata::ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) +
    geom_point() +
@@ -188,7 +228,7 @@ ggplot(classdata::ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) +
     ## Warning: Removed 447 rows containing missing values or values outside the scale range
     ## (`geom_line()`).
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 From the plot of Sale Price vs Total Living Area (sf), we see a clear
 pattern where most sale prices remain clustered at the lower range,
@@ -353,7 +393,7 @@ ggplot(average_price, aes(x = factor(Bedrooms), y = Average_Sale_Price)) +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 # Assuming 'ames' is your dataframe
@@ -380,9 +420,9 @@ ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
-## Tam Minh Nguyen
+\<\<\<\<\<\<\< HEAD \## Tam Minh Nguyen
 
 ### Data Exploration
 
@@ -446,7 +486,7 @@ ggplot(classdata::ames, aes(x = AC)) +
        y = "Frequency")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 There is a much higher frequency of properties with air conditioning
 compared to those without. The significant disparity in frequency
@@ -466,7 +506,7 @@ ggplot(avg_sale_price, aes(x = AC, y = avg_price, fill = AC)) +
        y = "Average Sale Price")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 The bar chart shows a clear pattern where the properties with air
 conditioning have a significantly higher average sale price compared to
@@ -477,10 +517,10 @@ oddities apparent from the data. People should look into why there is
 the big difference in sale price to understand what consumers want and
 market trends.
 
-Follow the instructions posted at
-<https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
-work is meant to be finished during the lab time, but you have time
-until Monday evening to polish things.
+======= \>\>\>\>\>\>\> 4874a2361ed893ab843312a3835f40143597e6b5 Follow
+the instructions posted at <https://ds202-at-isu.github.io/labs.html>
+for the lab assignment. The work is meant to be finished during the lab
+time, but you have time until Monday evening to polish things.
 
 Include your answers in this document (Rmd file). Make sure that it
 knits properly (into the md file). Upload both the Rmd and the md file

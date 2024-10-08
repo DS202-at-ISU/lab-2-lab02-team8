@@ -90,6 +90,9 @@ ggplot(ames_clean, aes(x = `YearBuilt`, y = `Sale Price`)) +
 ### Data Exploration
 
 1.  This dataset appears to include property transaction details, specifically focusing on sales of real estate in Ames.
+    ```{r}
+    str(classdata::ames)
+    ```
 
 Parcel ID: Categorical (likely a string or integer). Unique identifier for each property parcel.
 
@@ -162,6 +165,19 @@ Neighborhood: Limited set of neighborhood codes or names.
 ```{r}
 range(classdata::ames$`Sale Price`, na.rm = TRUE)
 ```
+
+```{r}
+library(classdata)
+
+hist(classdata::ames$`TotalLivingArea (sf)`,
+     main = "Histogram of Total Living Area",
+     xlab = "Total Living Area (sf)",
+     breaks = 30,
+     col = "lightblue",
+     border = "black")
+```
+
+The general pattern shows that most homes have a total living area between 1000 and 2500 square feet, with the peak around 2000 square feet. The distribution is right-skewed, with a few outliers of very large homes, especially those above 4000 square feet.
 
 ```{r}
 library(ggplot2)
