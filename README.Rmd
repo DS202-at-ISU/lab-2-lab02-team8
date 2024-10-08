@@ -177,13 +177,13 @@ From the plot of Sale Price vs Total Living Area (sf), we see a clear pattern wh
 
 ## Nhat Le
 
-1. Therefore, 6935 records with 16 variables. For example:
-- Sale Price
-- Year Built
-- Arcres
--Total Living Area
-- Bedriins
-- LotArea
+1.  Therefore, 6935 records with 16 variables. For example:
+
+-   Sale Price
+-   Year Built
+-   Arcres -Total Living Area
+-   Bedriins
+-   LotArea
 
 The data types of the variable can be seen by running the below code "str(ames)"
 
@@ -191,23 +191,26 @@ The data types of the variable can be seen by running the below code "str(ames)"
 ames <- classdata::ames
 str(ames)
 ```
+
 We can see the means and other statistical summaries by running summary(ames)
+
 ```{r}
 summary(ames)
 ```
 
-2. I will be inspecting the Bedrooms and the Sale Price
+2.  I will be inspecting the Bedrooms and the Sale Price
 
 3 & 4. Sale price ra ranges from 0 to 20500000; Bedrooms ranges from 0 to 10
+
 ```{r}
 range(ames$`Sale Price`, rm.na = TRUE)
 ```
-
 
 ```{r}
 bedroom_range <- range(ames$Bedrooms, na.rm = TRUE)
 print(bedroom_range)
 ```
+
 The bar chart showing the average sale price by the number of bedrooms indicates how property pricing varies with the number of bedrooms. Typically, you would expect that more bedrooms could correlate with a higher average sale price, although the chart suggests there might be nuances in this relationship.
 
 Review the bar chart for any apparent trends. For example, if properties with one bedroom have significantly higher average sale prices than those with two or three, this might indicate a specific market demand or limited availability of one-bedroom properties.
@@ -255,9 +258,60 @@ ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
   theme_minimal()
 ```
 
+## Tam Minh Nguyen
 
+### Data Exploration
 
+1.  The dataset has 16 variables with 6935 observations. For example, the variable includes:
 
+-   YearBuilt: Year the property was built (numeric variable).
+-   Acres: Property size in acres (numeric variable).
+-   TotalLivingArea: Total living area in square feet (numeric variable).
+-   Bedrooms: Number of bedrooms (numeric variable).
+-   FinishedBsmtArea: Finished basement area in square feet (numeric variable).
+-   LotArea: Lot size in square feet (numeric variable).
+
+```{r}
+str(classdata::ames)
+```
+
+2.  I focus on AC(whether it has air conditioner or not) and Sale Price 3 and 4:
+
+```{r}
+AC_range <- range(classdata::ames$AC, na.rm = TRUE)
+print(AC_range)
+```
+
+```{r}
+range(classdata::ames$`Sale Price`, na.rm = TRUE)
+```
+
+The range of sale prive is from 0 to 20500000
+
+```{r}
+library(ggplot2)
+ggplot(classdata::ames, aes(x = AC)) +
+  geom_bar(fill = "blue", color = "black") +
+  labs(title = "Bar Chart of Categorical Variable AC",
+       x = "AC",
+       y = "Frequency")
+```
+
+There is a much higher frequency of properties with air conditioning compared to those without. The significant disparity in frequency suggests that having air conditioning is very common and significantly affects the frequency. There are no unusual patterns directly visible from this chart.
+
+```{r}
+library(ggplot2)
+avg_sale_price <- classdata::ames %>%
+  group_by(AC) %>%
+  summarise(avg_price = mean(`Sale Price`, na.rm = TRUE))
+ggplot(avg_sale_price, aes(x = AC, y = avg_price, fill = AC)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Sale Price by Air Conditioning",
+       x = "Air Conditioning (AC)",
+       y = "Average Sale Price")
+```
+
+The bar chart shows a clear pattern where the properties with air conditioning have a significantly higher average sale price compared to those without air conditioning. This variable shows a clear difference in sale prices, suggesting that air conditioning is an important feature that strongly affects property value. Moreover, there are no specific oddities apparent from the data. People should look into why there is the big difference in sale price to understand what consumers want and market trends.
 
 Follow the instructions posted at <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 

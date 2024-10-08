@@ -382,6 +382,101 @@ ggplot(ames, aes(x = factor(Bedrooms), y = `Sale Price`)) +
 
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
+## Tam Minh Nguyen
+
+### Data Exploration
+
+1.  The dataset has 16 variables with 6935 observations. For example,
+    the variable includes:
+
+- YearBuilt: Year the property was built (numeric variable).
+- Acres: Property size in acres (numeric variable).
+- TotalLivingArea: Total living area in square feet (numeric variable).
+- Bedrooms: Number of bedrooms (numeric variable).
+- FinishedBsmtArea: Finished basement area in square feet (numeric
+  variable).
+- LotArea: Lot size in square feet (numeric variable).
+
+``` r
+str(classdata::ames)
+```
+
+    ## tibble [6,935 × 16] (S3: tbl_df/tbl/data.frame)
+    ##  $ Parcel ID            : chr [1:6935] "0903202160" "0907428215" "0909428070" "0923203160" ...
+    ##  $ Address              : chr [1:6935] "1024 RIDGEWOOD AVE, AMES" "4503 TWAIN CIR UNIT 105, AMES" "2030 MCCARTHY RD, AMES" "3404 EMERALD DR, AMES" ...
+    ##  $ Style                : Factor w/ 12 levels "1 1/2 Story Brick",..: 2 5 5 5 NA 9 5 5 5 5 ...
+    ##  $ Occupancy            : Factor w/ 5 levels "Condominium",..: 2 1 2 3 NA 2 2 1 2 2 ...
+    ##  $ Sale Date            : Date[1:6935], format: "2022-08-12" "2022-08-04" ...
+    ##  $ Sale Price           : num [1:6935] 181900 127100 0 245000 449664 ...
+    ##  $ Multi Sale           : chr [1:6935] NA NA NA NA ...
+    ##  $ YearBuilt            : num [1:6935] 1940 2006 1951 1997 NA ...
+    ##  $ Acres                : num [1:6935] 0.109 0.027 0.321 0.103 0.287 0.494 0.172 0.023 0.285 0.172 ...
+    ##  $ TotalLivingArea (sf) : num [1:6935] 1030 771 1456 1289 NA ...
+    ##  $ Bedrooms             : num [1:6935] 2 1 3 4 NA 4 5 1 3 4 ...
+    ##  $ FinishedBsmtArea (sf): num [1:6935] NA NA 1261 890 NA ...
+    ##  $ LotArea(sf)          : num [1:6935] 4740 1181 14000 4500 12493 ...
+    ##  $ AC                   : chr [1:6935] "Yes" "Yes" "Yes" "Yes" ...
+    ##  $ FirePlace            : chr [1:6935] "Yes" "No" "No" "No" ...
+    ##  $ Neighborhood         : Factor w/ 42 levels "(0) None","(13) Apts: Campus",..: 15 40 19 18 6 24 14 40 13 23 ...
+
+2.  I focus on AC(whether it has air conditioner or not) and Sale Price
+    3 and 4:
+
+``` r
+AC_range <- range(classdata::ames$AC, na.rm = TRUE)
+print(AC_range)
+```
+
+    ## [1] "No"  "Yes"
+
+``` r
+range(classdata::ames$`Sale Price`, na.rm = TRUE)
+```
+
+    ## [1]        0 20500000
+
+The range of sale prive is from 0 to 20500000
+
+``` r
+library(ggplot2)
+ggplot(classdata::ames, aes(x = AC)) +
+  geom_bar(fill = "blue", color = "black") +
+  labs(title = "Bar Chart of Categorical Variable AC",
+       x = "AC",
+       y = "Frequency")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+There is a much higher frequency of properties with air conditioning
+compared to those without. The significant disparity in frequency
+suggests that having air conditioning is very common and significantly
+affects the frequency. There are no unusual patterns directly visible
+from this chart.
+
+``` r
+library(ggplot2)
+avg_sale_price <- classdata::ames %>%
+  group_by(AC) %>%
+  summarise(avg_price = mean(`Sale Price`, na.rm = TRUE))
+ggplot(avg_sale_price, aes(x = AC, y = avg_price, fill = AC)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Sale Price by Air Conditioning",
+       x = "Air Conditioning (AC)",
+       y = "Average Sale Price")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+The bar chart shows a clear pattern where the properties with air
+conditioning have a significantly higher average sale price compared to
+those without air conditioning. This variable shows a clear difference
+in sale prices, suggesting that air conditioning is an important feature
+that strongly affects property value. Moreover, there are no specific
+oddities apparent from the data. People should look into why there is
+the big difference in sale price to understand what consumers want and
+market trends.
+
 Follow the instructions posted at
 <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
 work is meant to be finished during the lab time, but you have time
